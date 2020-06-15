@@ -1,0 +1,326 @@
+{
+	"info": {
+		"_postman_id": "cec2dd33-bab0-484a-8c01-f6354861f1a1",
+		"name": "Breaking Bad API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Which episode is titled Rebecca",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "54b48afa-976f-496d-b169-a6667527077a",
+						"exec": [
+							"var body = JSON.parse(responseBody);\r",
+							"var episodeName = \"Rebecca\";\r",
+							"\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(episodeName);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"for (var i = 0; i < body.length; i++){\r",
+							"    var episode = body[i];\r",
+							"    if (episode[\"title\"] == episodeName){\r",
+							"        console.log(\"The episode id for \" + e{pisode[\"title\"] + \" is \" + episode[\"episode_id\"]);\r",
+							"    }\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://www.breakingbadapi.com/api/episodes",
+					"protocol": "https",
+					"host": [
+						"www",
+						"breakingbadapi",
+						"com"
+					],
+					"path": [
+						"api",
+						"episodes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Which episode aired on the 19th of August 2012",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "df6baefc-a70d-4d28-b7df-90dc24dc9d9c",
+						"exec": [
+							"var body = JSON.parse(responseBody)\r",
+							"var dateToFind = \"08-19-2012\"\r",
+							"\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(airDate);\r",
+							"});\r",
+							"\r",
+							"for (var i = 0; i < body.length; i++){\r",
+							"    var episode = body[i];\r",
+							"    if (episode[\"air_date\"] == dateToFind){\r",
+							"        console.log(\"The episode that aired on \" +dateToFind +\" is \" +episode[\"title\"])\r",
+							"    }\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://www.breakingbadapi.com/api/episodes?air_date=08-19-2012",
+					"protocol": "https",
+					"host": [
+						"www",
+						"breakingbadapi",
+						"com"
+					],
+					"path": [
+						"api",
+						"episodes"
+					],
+					"query": [
+						{
+							"key": "air_date",
+							"value": "08-19-2012"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "In which episode does Gustavo Fring make his first appearance?",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e12efd27-1316-4476-9de6-4b1746130cdc",
+						"exec": [
+							"var body = JSON.parse(responseBody);\r",
+							"var charName = \"Gustavo Fring\";\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(charName);\r",
+							"});\r",
+							"\r",
+							"for (var i = 0; i < body.length; i++){\r",
+							"    var episode = body[i];\r",
+							"    if (episode[\"characters\"].includes(charName)){\r",
+							"        console.log(\"The first appearance of \" +charName +\" is titled \" +episode[\"title\"] +\" and episode id is \" +episode[\"episode_id\"]);\r",
+							"        break;\r",
+							"    }\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://www.breakingbadapi.com/api/episodes?characters=Gustavo+Fring",
+					"protocol": "https",
+					"host": [
+						"www",
+						"breakingbadapi",
+						"com"
+					],
+					"path": [
+						"api",
+						"episodes"
+					],
+					"query": [
+						{
+							"key": "characters",
+							"value": "Gustavo+Fring"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Name 1 character that is in both Breaking Bad and Better Call Saul",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c4714732-7cd3-41ec-bff3-3d78f0b5a283",
+						"exec": [
+							"var body = JSON.parse(responseBody);\r",
+							"var seriesIn = \"Breaking Bad, Better Call Saul\";\r",
+							"\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(seriesIn);\r",
+							"});\r",
+							"\r",
+							"for (var i = 0; i < body.length; i++){\r",
+							"    var series = body[i];\r",
+							"    if (series[\"category\"] == seriesIn){\r",
+							"        console.log (\"A character that is in \" +seriesIn +\" is \" +series[\"name\"]);\r",
+							"        break;\r",
+							"    }\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://www.breakingbadapi.com/api/characters?category=Better+Call+Saul",
+					"protocol": "https",
+					"host": [
+						"www",
+						"breakingbadapi",
+						"com"
+					],
+					"path": [
+						"api",
+						"characters"
+					],
+					"query": [
+						{
+							"key": "category",
+							"value": "Breaking+Bad",
+							"disabled": true
+						},
+						{
+							"key": "category",
+							"value": "Better+Call+Saul"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Which character is portrayed by Patrick Fabian?",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://www.breakingbadapi.com/api/characters?portrayed=Patrick+Fabian",
+					"protocol": "https",
+					"host": [
+						"www",
+						"breakingbadapi",
+						"com"
+					],
+					"path": [
+						"api",
+						"characters"
+					],
+					"query": [
+						{
+							"key": "portrayed",
+							"value": "Patrick+Fabian"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Who's words are these \"Chemistry is the study of matter, but I prefer to see it at the study of change.\"?",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://www.breakingbadapi.com/api/quotes",
+					"protocol": "https",
+					"host": [
+						"www",
+						"breakingbadapi",
+						"com"
+					],
+					"path": [
+						"api",
+						"quotes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "How many deaths are there in Breaking Bad?",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://www.breakingbadapi.com/api/death-count",
+					"protocol": "https",
+					"host": [
+						"www",
+						"breakingbadapi",
+						"com"
+					],
+					"path": [
+						"api",
+						"death-count"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Which episode has the most number of deaths?",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{domain}}/deaths",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"deaths"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "What is the title of episode 8 of season 2 of Better Call Saul?",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{domain}}/episodes?series=Better+Call+Saul",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"episodes"
+					],
+					"query": [
+						{
+							"key": "series",
+							"value": "Better+Call+Saul"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
